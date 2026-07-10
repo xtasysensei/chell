@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 # CHELL
 
-A TUI chat appliication written in c and go
+A TUI chat appliication written in C and Go
 
 ## flow
 - create username(new or last used username(should usernames be unique in rooms?once joined, a room server keeps tracl pf its members and prevents supliicate usernames. how to reuse usernames? wil the server room remember ysernames and their corresponding device signatures?))
