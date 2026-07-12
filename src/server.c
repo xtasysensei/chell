@@ -2,16 +2,21 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <errno.h>
 #include <string.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <sys/stat.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <signal.h>
 
 
 #define PORT "4444"
 #define BACKLOG 10
+
+void *get_in_addr(struct sockaddr *saddr);
 
 int main(int argc, char *argv[]) {
     struct sockaddr_storage the_addr;
@@ -54,4 +59,13 @@ int main(int argc, char *argv[]) {
    close(newfd);
    close(sockfd);
     return 0;
+}
+
+void *get_in_addr(struct sockaddr *saddr) {
+    if (saddr->sa_family == AF_INET) {
+        return &(((struct sockaddr_in*)saddr)->sin_addr);
+    }
+
+    return &(((struct sockaddr_in6*)saddr)->sin6_addr);
+
 }
